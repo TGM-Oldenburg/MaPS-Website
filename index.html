@@ -3,14 +3,40 @@
     <head>
         <meta charset="utf-8">
         <title>PESTO</title>
+        <link rel="stylesheet" href="style.css">
     </head>
     <body>
         <script src="fft.js"></script>
         <script src="plotly-latest.min.js"></script>
         <script src="pesto.js"></script>
-        <audio id='sample' src="Mann_short.wav" controls></audio>
-        <div id="mydiv"></div>
-        <script>display_spectrogram("Mann_short.wav", "mydiv")</script>
-        <p>Pesto</p>
+
+        <header>
+            <h1>Pesto: Accurate Pitch Estimation in the Magnitude and Phase Spectrogram</h1>
+        </header>
+
+        <article>
+            <p class="abstract">This paper presents a new algorithm (PESTO) for estimating the fundamental frequency of human voices using both the magnitude and phase spectrogram. In order to evaluate the accuracy of the new algorithm, several variants of PESTO are compared to one another, and to the reference algorithms YIN, RAPT, and PEFAC on a large database of speech recordings and background noises. The evaluation shows that PESTO outperforms these algorithms, both in terms of fundamental frequency estimation precision and voice activity detection accuracy. Additional experiments evaluate PESTO's performance for different pitch frequencies, noise types, and reverberation. At positive signal to noise ratios, PESTO reaches close to 100&nbsp;% fundamental frequency estimation precision and 90&nbsp;% voice activity detection accuracy across the entire dataset.</p>
+
+            <div id="introspectrogram"></div>
+            <script>display_spectrogram("Mann_short.wav", "introspectrogram", [650, 300])</script>
+            <p class="todo">Add fundamental frequency annotation</p>
+
+            <h2>Code</h2>
+
+            <p>You can download free implementations of PESTO in Python, Matlab, and Julia by cloning this repository:</p>
+            <code>git clone foo@bar.pesto.git</code>
+            <p>The code is released under the terms of the <a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-clause license</a>, &#169; 2016, Bastian Bechtold, Jade Hochschule</p>
+
+            <h2>PESTO-M: Correlating Templates with the Magnitude Spectrum</h2>
+
+            <h2>PESTO-P: Subtracting Templates from the Instantaneous Frequency Deviation</h2>
+
+            <h2>PESTO: Maximum A Posteriori Combination of Magnitude Correlation and IFD Difference</h2>
+
+            <h2>Evaluation</h2>
+        </article>
+
+        <footer><p>&#169; 2016, Bechtold, van de Par, Bitzer. All rights reserved</p></footer>
+
     </body>
 </html>

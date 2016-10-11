@@ -41,7 +41,7 @@ function logabsrfft(real, window) {
     return result;
 }
 
-function display_spectrogram(filename, divname) {
+function display_spectrogram(filename, divname, size) {
     fetch(filename, {method:'GET'}).then(response => {
         response.arrayBuffer().then(arraybuffer => {
             var audioCtx = new AudioContext();
@@ -70,6 +70,9 @@ function display_spectrogram(filename, divname) {
                     yaxis: { range: [0, 4000], title: 'frequency in Hz' },
                     margin: { t:20, r:20, b:50, l:100 }
                 };
+                if (size) {
+                    [plotlayout.width, plotlayout.height] = size;
+                }
                 Plotly.newPlot(divname, plotdata, plotlayout);
             });
         });
