@@ -68,3 +68,7 @@ footer {
     display: block;
     font-size: 13px;
 }
+
+form {
+    text-align: center;
+}

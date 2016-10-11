@@ -28,6 +28,23 @@
             <p>The code is released under the terms of the <a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-clause license</a>, &#169; 2016, Bastian Bechtold, Jade Hochschule</p>
 
             <h2>PESTO-M: Correlating Templates with the Magnitude Spectrum</h2>
+            <p>PESTO-M correlates a number of template spectra at different fundamental frequencies with the signal spectrum. The point of highest correlation is the estimated fundamental frequency</p>
+
+            <div id="pestom-visualization"></div>
+            <script src="pestom-visualization.js"></script>
+            <form style="text-align:center;">
+                <label>estimated fundamental frequency:</label>
+                <label class="value" id="PESTO-M:f0:value">loading</label><br>
+                <label class="start">80 Hz</label>
+                <input id="PESTO-M:f0:slider" type="range"
+                       name="fundamental frequency"
+                       min="80" max="450" step="5" value ="150"
+                       onchange="updatePESTOM(this.value);"
+                       oninput="document.getElementById('PESTO-M:f0:value').innerHTML = this.value + ' Hz';"
+                       style="width:150px;">
+                <label class="stop">450 Hz</label>
+            </form>
+            <p>At about 115 Hz, all the peaks in the template match up with the peaks in the spectrum, and the Magnitude Correlation reaches its maximum. This frequency is the estimated fundamental frequency for this spectrum.</p>
 
             <h2>PESTO-P: Subtracting Templates from the Instantaneous Frequency Deviation</h2>
 
