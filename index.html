@@ -15,36 +15,62 @@
         </header>
 
         <article>
-            <p class="abstract">This paper presents a new algorithm (PESTO) for estimating the fundamental frequency of human voices using both the magnitude and phase spectrogram. In order to evaluate the accuracy of the new algorithm, several variants of PESTO are compared to one another, and to the reference algorithms YIN, RAPT, and PEFAC on a large database of speech recordings and background noises. The evaluation shows that PESTO outperforms these algorithms, both in terms of fundamental frequency estimation precision and voice activity detection accuracy. Additional experiments evaluate PESTO's performance for different pitch frequencies, noise types, and reverberation. At positive signal to noise ratios, PESTO reaches close to 100&nbsp;% fundamental frequency estimation precision and 90&nbsp;% voice activity detection accuracy across the entire dataset.</p>
+            <p class="abstract">This paper presents a new algorithm (PESTO) for estimating the
+                fundamental frequency of human voices using both the magnitude and phase
+                spectrogram. In order to evaluate the accuracy of the new algorithm, several
+                variants of PESTO are compared to one another, and to the reference algorithms YIN,
+                RAPT, and PEFAC on a large database of speech recordings and background noises. The
+                evaluation shows that PESTO outperforms these algorithms, both in terms of
+                fundamental frequency estimation precision and voice activity detection accuracy.
+                Additional experiments evaluate PESTO's performance for different pitch frequencies,
+                noise types, and reverberation. At positive signal to noise ratios, PESTO reaches
+                close to 100&nbsp;% fundamental frequency estimation precision and 90&nbsp;% voice
+                activity detection accuracy across the entire dataset.</p>
 
             <div id="introspectrogram"></div>
             <script>display_spectrogram("Mann_short.wav", "introspectrogram", [650, 300])</script>
+
             <p class="todo">Add fundamental frequency annotation</p>
+
 
             <h2>Code</h2>
 
-            <p>You can download free implementations of PESTO in Python, Matlab, and Julia by cloning this repository:</p>
+            <p>You can download free implementations of PESTO in Python, Matlab, and Julia by
+            cloning this repository:</p>
             <code>git clone foo@bar.pesto.git</code>
-            <p>The code is released under the terms of the <a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-clause license</a>, &#169; 2016, Bastian Bechtold, Jade Hochschule</p>
+            <p>The code is released under the terms of the
+                <a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-clause license</a>,
+                &#169; 2016, Bastian Bechtold, Jade Hochschule</p>
+
 
             <h2>PESTO-M: Correlating Templates with the Magnitude Spectrum</h2>
-            <p>PESTO-M correlates a number of template spectra at different fundamental frequencies with the signal spectrum. The point of highest correlation is the estimated fundamental frequency</p>
 
-            <div id="pestom-visualization"></div>
-            <script src="pestom-visualization.js"></script>
+            <p>PESTO-M correlates a number of template spectra at different fundamental frequencies
+                with the signal magnitude spectrum. The point of highest correlation is the
+                estimated fundamental frequency</p>
+
+            <div id="pestom"></div>
+            <script src="pestom.js"></script>
             <form style="text-align:center;">
                 <label>estimated fundamental frequency:</label>
-                <label class="value" id="PESTO-M:f0:value">loading</label><br>
+                <label class="value" id="PESTO-M:value">loading</label><br>
                 <label class="start">80 Hz</label>
-                <input id="PESTO-M:f0:slider" type="range"
+                <input id="PESTO-M:slider" type="range"
                        name="fundamental frequency"
                        min="80" max="450" step="5" value ="150"
                        onchange="updatePESTOM(this.value);"
-                       oninput="document.getElementById('PESTO-M:f0:value').innerHTML = this.value + ' Hz';"
+                       oninput="document.getElementById('PESTO-M:value').innerHTML = this.value + ' Hz';"
                        style="width:150px;">
                 <label class="stop">450 Hz</label>
             </form>
-            <p>At about 115 Hz, all the peaks in the template match up with the peaks in the spectrum, and the Magnitude Correlation reaches its maximum. This frequency is the estimated fundamental frequency for this spectrum.</p>
+
+            <p class="todo">Provide feedback for optimal f<sub>0</sub></p>
+            <p class="todo">Change spectrum to something more interesting</p>
+
+            <p>At about 115 Hz, all the peaks in the template match up with the peaks in the
+                spectrum, and the magnitude correlation reaches its maximum. This frequency is the
+                estimated fundamental frequency for this spectrum.</p>
+
 
             <h2>PESTO-P: Subtracting Templates from the Instantaneous Frequency Deviation</h2>
 

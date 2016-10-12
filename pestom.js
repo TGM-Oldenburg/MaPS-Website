@@ -1,10 +1,10 @@
 var pestomdata = null;
-fetch('pestomdata.json', {method:'GET'}).then(response => {
+fetch('pestom.json', {method:'GET'}).then(response => {
     response.json().then(data => {
         pestomdata = data;
-        var f0 = document.getElementById('PESTO-M:f0:slider').value;
+        var f0 = document.getElementById('PESTO-M:slider').value;
         updatePESTOM(f0);
-        document.getElementById('PESTO-M:f0:value').innerHTML = f0 + ' Hz';
+        document.getElementById('PESTO-M:value').innerHTML = f0 + ' Hz';
     });
 });
 
@@ -37,7 +37,7 @@ function updatePESTOM(f0) {
         margin: { t:30, r:20, b:50, l:50 },
         title: "Magnitude Correlation = " + correlation.toFixed(2)
     };
-    Plotly.newPlot("pestom-visualization", plotdata, plotlayout);
+    Plotly.newPlot("pestom", plotdata, plotlayout);
 }
 
 updatePESTOM(150);

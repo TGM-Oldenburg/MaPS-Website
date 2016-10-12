@@ -20,7 +20,7 @@ function split_blocks(data, blocksize, hopsize, samplerate) {
 }
 
 function hann(length) {
-    result = new Array(length);
+    var result = new Array(length);
     for (var n=0; n<length; n++) {
         result[n] = 0.5 * (1 - Math.cos( (2*Math.PI*n)/(length-1) ));
     }
