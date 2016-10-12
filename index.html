@@ -74,7 +74,40 @@
 
             <h2>PESTO-P: Subtracting Templates from the Instantaneous Frequency Deviation</h2>
 
+            <p> This variant is the Instantanous Frequency Deviation (IFD), which is IF(f)-f, where
+                IF is the Instantanous Frequency, or time-derivative of the phase spectrum.</p>
+
+            <div id="ifd"></div>
+            <script>display_ifd("Mann_short.wav", "ifd", [650, 300])</script>
+
+            <p>In the IFD, speech is represented by a sawtooth pattern. PESTO-P subtracts a number
+                of template spectra at different fundamental frequencies from the IFD. The point of
+                lowest difference is the estimated fundamental frequency.</p>
+
+            <div id="pestop"></div>
+            <script src="pestop.js"></script>
+            <form style="text-align:center;">
+                <label>estimated fundamental frequency:</label>
+                <label class="value" id="PESTO-P:value">loading</label><br>
+                <label class="start">80 Hz</label>
+                <input id="PESTO-P:slider" type="range"
+                       name="fundamental frequency"
+                       min="80" max="450" step="5" value ="150"
+                       onchange="updatePESTOP(this.value);"
+                       oninput="document.getElementById('PESTO-P:value').innerHTML = this.value + ' Hz';"
+                       style="width:150px;">
+                <label class="stop">450 Hz</label>
+            </form>
+
+            <p class="todo">Provide feedback for optimal f<sub>0</sub></p>
+            <p class="todo">Change spectrum to something more interesting</p>
+
+            <p>At about 115 Hz, all the zeros in the template match up with the zeros in the
+                spectrum, and the IFD difference reaches its maximum. This frequency is the
+                estimated fundamental frequency for this spectrum.</p>
+
             <h2>PESTO: Maximum A Posteriori Combination of Magnitude Correlation and IFD Difference</h2>
+
 
             <h2>Evaluation</h2>
         </article>
