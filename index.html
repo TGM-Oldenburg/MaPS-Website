@@ -157,6 +157,27 @@
 
 
             <h2>Evaluation</h2>
+
+            <p>The fundamental frequency estimation performance of PESTO was evaluated using a large
+                database of f<sub>0</sub>-annotated speech recordings from the PTDB-TUG corpus, and
+                acoustic noise recordings from the QUT-NOISE corpus.</p>
+
+            <p>Additionally, the PESTO's performance was compared against the well-known fundamental
+                frequency estimation algorithms PEFAC, RAPT, and YIN. The error measures for this
+                evaluation are:</p>
+
+            <dl>
+                <dt>Gross Pitch Error</dt><dd>Percentage of frames that are correctly classified as
+                    pitched, and whose pitch is within 20% of the true pitch.</dd>
+                <dt>Fine Pitch Error</dt><dd>Mean error of pitch estimates that are within 20%.</dd>
+            </dl>
+
+            <div id="pesto-gpe"></div><div id="pesto-fpe"></div>
+            <script src="pesto-compare.js"></script>
+            <p class="todo">Add selection for type of noise</p>
+
+            <p>Thus, PESTO achieves almost 100% precision at positive signal to noise ratios.</p>
+
         </article>
 
         <footer><p>© 2016, Bechtold, van de Par, Bitzer. All rights reserved</p></footer>
