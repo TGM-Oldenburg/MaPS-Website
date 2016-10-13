@@ -40,7 +40,7 @@
             <code>git clone foo@bar.pesto.git</code>
             <p>The code is released under the terms of the
                 <a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-clause license</a>,
-                &#169; 2016, Bastian Bechtold, Jade Hochschule</p>
+                © 2016, Bastian Bechtold, Jade Hochschule</p>
 
 
             <h2>PESTO-M: Correlating Templates with the Magnitude Spectrum</h2>
@@ -106,13 +106,60 @@
                 spectrum, and the IFD difference reaches its maximum. This frequency is the
                 estimated fundamental frequency for this spectrum.</p>
 
+
             <h2>PESTO: Maximum A Posteriori Combination of Magnitude Correlation and IFD Difference</h2>
+
+            <p>PESTO combines the magnitude correlation from PESTO-M with the IFD difference from
+                PESTO-P in a Bayesan maximum a posteriori fundamental frequency estimator. You can
+                see the results of this estimation on a few speech signals from the PTDB-TUG
+                database and noises from the QUT-NOISE corpus in the next figure:</p>
+
+            <div id="pesto"></div>
+            <select id="PESTO:speaker" style="text-align:center;" onchange="refresh_pesto()">
+                <option value="male1" selected>Male Speaker 1</option>
+                <option value="male2">Male Speaker 2</option>
+                <option value="female1">Female Speaker 1</option>
+                <option value="female2">Female Speaker 2</option>
+            </select>
+            <select id="PESTO:snr" style="text-align:center;" onchange="refresh_pesto()">
+                <option value="40">40 dB SNR</option>
+                <option value="35">35 dB SNR</option>
+                <option value="30">30 dB SNR</option>
+                <option value="25">25 dB SNR</option>
+                <option value="20">20 dB SNR</option>
+                <option value="15">15 dB SNR</option>
+                <option value="10" selected>10 dB SNR</option>
+                <option value="5">5 dB SNR</option>
+                <option value="0">0 dB SNR</option>
+                <option value="-5">-5 dB SNR</option>
+                <option value="-10">-10 dB SNR</option>
+                <option value="-15">-15 dB SNR</option>
+                <option value="-20">-20 dB SNR</option>
+            </select>
+            <select id="PESTO:noise" style="text-align:center;" onchange="refresh_pesto()">
+                <option value="cafeteria" selected>Cafeteria Noise</option>
+                <option value="white">White Noise</option>
+                <option value="traffic">Traffic Noise</option>
+                <option value="car">Driving Noise</option>
+            </select>
+            <audio id="PESTO:player" controls></audio>
+
+            <p class="todo">Gut funktionierende Beispiel-Dateien auswählen.</p>
+            <p class="todo">Formatierung der Bedienelemente verbessern</p>
+            <p class="todo">Datenquellen beschreiben und verlinken</p>
+            <p class="todo">Gutes Default-Bild wählen</p>
+
+            <p>This figure shows PESTO's strengths and limitations. On the one hand, PESTO estimates
+                speech fundamental frequencies with very high precision and very rarely selects
+                non-pitched values as pitched. On the other hand, this precision leads to less
+                accuracy, and some pitched frames are not recognized. This is a trade-off that is
+                configurable through a parameter.</p>
 
 
             <h2>Evaluation</h2>
         </article>
 
-        <footer><p>&#169; 2016, Bechtold, van de Par, Bitzer. All rights reserved</p></footer>
+        <footer><p>© 2016, Bechtold, van de Par, Bitzer. All rights reserved</p></footer>
 
     </body>
 </html>

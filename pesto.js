@@ -1,3 +1,13 @@
+var audioCtx = new AudioContext();
+
+var pestodata = null;
+fetch('samples/tracks.json', {method:'GET'}).then(response => {
+    response.json().then(data => {
+        pestodata = data;
+        refresh_pesto();
+    });
+});
+
 function linspace(start, stop, length) {
     var result = new Array(length);
     var step = (stop-start)/(length-1);
@@ -53,10 +63,9 @@ function logabsrfft(real, window) {
     return result;
 }
 
-function display_spectrogram(filename, divname, size) {
+function display_spectrogram(filename, divname, size, tracks) {
     fetch(filename, {method:'GET'}).then(response => {
         response.arrayBuffer().then(arraybuffer => {
-            var audioCtx = new AudioContext();
             audioCtx.decodeAudioData(arraybuffer).then(audiobuffer => {
                 var data = audiobuffer.getChannelData(0);
                 var blocksize = 2048;
@@ -77,9 +86,29 @@ function display_spectrogram(filename, divname, size) {
                     colorbar: { title: 'level in dB FS',
                                 titleside: 'right' }
                 }];
+                if (typeof tracks !== 'undefined') {
+                    plotdata = plotdata.concat({
+                        x: tracks.true_t,
+                        y: Array.from(tracks.true_f, f => f!=0?f:NaN),
+                        name: 'true f0',
+                        type: 'scatter',
+                        mode: 'lines',
+                        line: {color: 'orange'}
+                    }, {
+                        x: tracks.est_t,
+                        y: Array.from(tracks.est_f, f => f!=0?f:NaN),
+                        name: 'estimated f0',
+                        type: 'scatter',
+                        mode: 'markers',
+                        marker: {size: 3},
+                        line: {color: 'red'}
+                    });
+                    plotdata[0].colorbar.ypad = 30;
+                    plotdata[0].colorbar.y = 0.4
+                }
                 var plotlayout = {
                     xaxis: { autorange: true, title: 'time in s' },
-                    yaxis: { range: [0, 4000], title: 'frequency in Hz' },
+                    yaxis: { range: [0, 2000], title: 'frequency in Hz' },
                     margin: { t:20, r:20, b:50, l:100 }
                 };
                 if (size) {
@@ -130,7 +159,6 @@ function ifd_spectrum(block, window) {
 function display_ifd(filename, divname, size) {
     fetch(filename, {method:'GET'}).then(response => {
         response.arrayBuffer().then(arraybuffer => {
-            var audioCtx = new AudioContext();
             audioCtx.decodeAudioData(arraybuffer).then(audiobuffer => {
                 var data = audiobuffer.getChannelData(0);
                 var dt = Math.floor(audiobuffer.sampleRate / 160);
@@ -191,4 +219,16 @@ function twilight() {
                   'rgb(0.25965113, 0.06941247, 0.34424417)',
                   'rgb(0.15460852, 0.03000286, 0.18789489)'];
     return Array.from(colors, (color, idx) => [idx/(colors.length-1), color]);
+}
+
+function refresh_pesto() {
+    var speaker = document.getElementById("PESTO:speaker").value;
+    var snr = document.getElementById("PESTO:snr").value;
+    var noise = document.getElementById("PESTO:noise").value;
+    display_pesto(speaker + noise + snr + ".wav");
+}
+
+function display_pesto(filename) {
+    document.getElementById("PESTO:player").src = 'samples/' + filename;
+    display_spectrogram('samples/' + filename, "pesto", [650, 300], pestodata[filename]);
 }
