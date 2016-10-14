@@ -21,13 +21,13 @@ function updatePESTOP(f0) {
 
     var plotdata = [{
         type: "scatter",
-        name: "template",
+        name: "template IFD",
         x: pestopdata.frequencies,
         y: pestopdata[f0]
     },
     {
         type: "scatter",
-        name: "spectrum",
+        name: "IFD spectrum",
         x: pestopdata.frequencies,
         y: pestopdata.spectrum
     }];

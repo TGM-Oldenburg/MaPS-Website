@@ -38,8 +38,9 @@ function update_pesto_compare(divname, data, ylabel, ylim) {
         xaxis: {
             title: 'SNR in dB',
             tickmode: 'array',
-            tickvals: snrs
-               },
+            tickvals: snrs,
+            zeroline: false
+        },
         yaxis: { title: ylabel, range: ylim },
         margin: { t:20, r:20, b:50, l:100 },
         width: 600,
