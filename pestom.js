@@ -38,6 +38,11 @@ function updatePESTOM(f0) {
         title: "Magnitude Correlation = " + correlation.toFixed(2)
     };
     Plotly.newPlot("pestom", plotdata, plotlayout);
-}
 
-updatePESTOM(150);
+    if (f0 == 115) {
+        document.getElementById('PESTO-M:value').innerHTML += ' (optimal)';
+        document.getElementById('PESTO-M:value').style.color = 'green';
+    } else {
+        document.getElementById('PESTO-M:value').style.color = '';
+    }
+}

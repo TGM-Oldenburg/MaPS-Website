@@ -28,9 +28,6 @@
                 activity detection accuracy across the entire dataset.</p>
 
             <div id="introspectrogram"></div>
-            <script>display_spectrogram("Mann_short.wav", "introspectrogram", [650, 300])</script>
-
-            <p class="todo">Add fundamental frequency annotation</p>
 
 
             <h2>Code</h2>
@@ -64,9 +61,6 @@
                 <label class="stop">450 Hz</label>
             </form>
 
-            <p class="todo">Provide feedback for optimal f<sub>0</sub></p>
-            <p class="todo">Change spectrum to something more interesting</p>
-
             <p>At about 115 Hz, all the peaks in the template match up with the peaks in the
                 spectrum, and the magnitude correlation reaches its maximum. This frequency is the
                 estimated fundamental frequency for this spectrum.</p>
@@ -99,9 +93,6 @@
                 <label class="stop">450 Hz</label>
             </form>
 
-            <p class="todo">Provide feedback for optimal f<sub>0</sub></p>
-            <p class="todo">Change spectrum to something more interesting</p>
-
             <p>At about 115 Hz, all the zeros in the template match up with the zeros in the
                 spectrum, and the IFD difference reaches its maximum. This frequency is the
                 estimated fundamental frequency for this spectrum.</p>
@@ -111,15 +102,15 @@
 
             <p>PESTO combines the magnitude correlation from PESTO-M with the IFD difference from
                 PESTO-P in a Bayesan maximum a posteriori fundamental frequency estimator. You can
-                see the results of this estimation on a few speech signals from the PTDB-TUG
-                database and noises from the QUT-NOISE corpus in the next figure:</p>
+                see the results of this estimation on a few speech signals from the
+                <a href="https://www.spsc.tugraz.at/tools/ptdb-tug">PTDB-TUG</a>
+                database and noises from the <a href="http://eprints.qut.edu.au/85240/">QUT-NOISE</a>
+                corpus in the next figure:</p>
 
             <div id="pesto"></div>
             <select id="PESTO:speaker" style="text-align:center;" onchange="refresh_pesto()">
-                <option value="male1" selected>Male Speaker 1</option>
-                <option value="male2">Male Speaker 2</option>
-                <option value="female1">Female Speaker 1</option>
-                <option value="female2">Female Speaker 2</option>
+                <option value="male1">Male Speaker</option>
+                <option value="female2" selected>Female Speaker</option>
             </select>
             <select id="PESTO:snr" style="text-align:center;" onchange="refresh_pesto()">
                 <option value="40">40 dB SNR</option>
@@ -137,17 +128,12 @@
                 <option value="-20">-20 dB SNR</option>
             </select>
             <select id="PESTO:noise" style="text-align:center;" onchange="refresh_pesto()">
-                <option value="cafeteria" selected>Cafeteria Noise</option>
+                <option value="cafeteria">Cafeteria Noise</option>
                 <option value="white">White Noise</option>
                 <option value="traffic">Traffic Noise</option>
-                <option value="car">Driving Noise</option>
+                <option value="car" selected>Driving Noise</option>
             </select>
             <audio id="PESTO:player" controls></audio>
-
-            <p class="todo">Gut funktionierende Beispiel-Dateien auswählen.</p>
-            <p class="todo">Formatierung der Bedienelemente verbessern</p>
-            <p class="todo">Datenquellen beschreiben und verlinken</p>
-            <p class="todo">Gutes Default-Bild wählen</p>
 
             <p>This figure shows PESTO's strengths and limitations. On the one hand, PESTO estimates
                 speech fundamental frequencies with very high precision and very rarely selects
@@ -174,7 +160,6 @@
 
             <div id="pesto-gpe"></div><div id="pesto-fpe"></div>
             <script src="pesto-compare.js"></script>
-            <p class="todo">Add selection for type of noise</p>
 
             <p>Thus, PESTO achieves almost 100% precision at positive signal to noise ratios.</p>
 

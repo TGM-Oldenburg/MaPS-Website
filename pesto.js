@@ -86,7 +86,7 @@ function display_spectrogram(filename, divname, size, tracks) {
                     colorbar: { title: 'level in dB FS',
                                 titleside: 'right' }
                 }];
-                if (typeof tracks !== 'undefined') {
+                if (typeof tracks.true_t !== 'undefined') {
                     plotdata = plotdata.concat({
                         x: tracks.true_t,
                         y: Array.from(tracks.true_f, f => f!=0?f:NaN),
@@ -94,7 +94,10 @@ function display_spectrogram(filename, divname, size, tracks) {
                         type: 'scatter',
                         mode: 'lines',
                         line: {color: 'orange'}
-                    }, {
+                    });
+                }
+                if (typeof tracks.est_t !== 'undefined') {
+                    plotdata = plotdata.concat({
                         x: tracks.est_t,
                         y: Array.from(tracks.est_f, f => f!=0?f:NaN),
                         name: 'estimated f0',
@@ -232,3 +235,9 @@ function display_pesto(filename) {
     document.getElementById("PESTO:player").src = 'samples/' + filename;
     display_spectrogram('samples/' + filename, "pesto", [650, 300], pestodata[filename]);
 }
+
+fetch('Mann_short.json', {method:'GET'}).then(response => {
+    response.json().then(data => {
+        display_spectrogram("Mann_short.wav", "introspectrogram", [650, 300], data);
+    });
+});

@@ -40,6 +40,11 @@ function updatePESTOP(f0) {
         title: "IFD Difference = " + difference.toFixed(2)
     };
     Plotly.newPlot("pestop", plotdata, plotlayout);
-}
 
-updatePESTOP(150);
+    if (f0 == 115) {
+        document.getElementById('PESTO-P:value').innerHTML += ' (optimal)';
+        document.getElementById('PESTO-P:value').style.color = 'green';
+    } else {
+        document.getElementById('PESTO-P:value').style.color = '';
+    }
+}
