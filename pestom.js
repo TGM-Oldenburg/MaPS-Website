@@ -14,9 +14,14 @@ function updatePESTOM(f0) {
     }
 
     var correlation = 0;
+    // calculate the log-f correlation of the signal spectrum and the template spectrum
     for (let n=0; n<pestomdata.spectrum.length; n++) {
-        correlation += pestomdata.spectrum[n] * pestomdata[f0][n];
+        // equivalent to 1/diff(logspace( f..fs/2 )):
+        var f = n/pestomdata.spectrum.length*22050;
+        var log_weight = Math.pow(1/22050, f/22050)
+        correlation += pestomdata.spectrum[n] * pestomdata[f0][n] * log_weight;
     }
+
     var plotdata = [{
         type: "scatter",
         name: "template",
@@ -39,6 +44,7 @@ function updatePESTOM(f0) {
     };
     Plotly.newPlot("pestom", plotdata, plotlayout);
 
+    document.getElementById('PESTO-M:value').innerHTML = document.getElementById('PESTO-M:slider').value + '&thinsp;Hz';
     if (f0 == 115) {
         document.getElementById('PESTO-M:value').innerHTML += ' (optimal)';
         document.getElementById('PESTO-M:value').style.color = 'green';

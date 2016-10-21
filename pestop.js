@@ -14,10 +14,23 @@ function updatePESTOP(f0) {
     }
 
     var difference = 0;
+    // calculate the log-f difference of the signal IFD and the template IFD
     for (let n=0; n<pestopdata.spectrum.length; n++) {
-        difference += Math.abs(pestopdata.spectrum[n] - pestopdata[f0][n]);
+        var f = n/pestomdata.spectrum.length*22050;
+        // equivalent to 1/diff(logspace( f..fs/2 )):
+        var log_weight = Math.pow(1/22050, f/22050)
+        var signal_ifd = pestopdata.spectrum[n];
+        var template_ifd = pestopdata[f0][n];
+        difference += Math.abs(signal_ifd - template_ifd) * log_weight;
     }
     difference /= pestopdata.spectrum.length;
+    // correct for bias due to
+    // - at low f0: the signal variability
+    // - at high f0: the template variability
+    var signal_bias = 34; // := xcorr(signal_ifd, template_ifd[f0=80])
+    var template_bias = 115; // := xcorr(signal_ifd, template_ifd[f0=450])
+    var bias = signal_bias + (f0-80)/(450-80)*(template_bias - signal_bias);
+    difference /= bias;
 
     var plotdata = [{
         type: "scatter",
@@ -41,6 +54,7 @@ function updatePESTOP(f0) {
     };
     Plotly.newPlot("pestop", plotdata, plotlayout);
 
+    document.getElementById('PESTO-P:value').innerHTML = document.getElementById('PESTO-P:slider').value + '&thinsp;Hz';
     if (f0 == 115) {
         document.getElementById('PESTO-P:value').innerHTML += ' (optimal)';
         document.getElementById('PESTO-P:value').style.color = 'green';

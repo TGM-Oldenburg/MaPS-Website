@@ -55,8 +55,7 @@
                 <input id="PESTO-M:slider" type="range"
                        name="fundamental frequency"
                        min="80" max="450" step="5" value ="150"
-                       onchange="updatePESTOM(this.value);"
-                       oninput="document.getElementById('PESTO-M:value').innerHTML = this.value + '&thinsp;Hz';"
+                       oninput="updatePESTOM(this.value);"
                        style="width:150px;">
                 <label class="stop">450&thinsp;Hz</label>
             </form>
@@ -87,8 +86,7 @@
                 <input id="PESTO-P:slider" type="range"
                        name="fundamental frequency"
                        min="80" max="450" step="5" value ="150"
-                       onchange="updatePESTOP(this.value);"
-                       oninput="document.getElementById('PESTO-P:value').innerHTML = this.value + '&thinsp;Hz';"
+                       oninput="updatePESTOP(this.value);"
                        style="width:150px;">
                 <label class="stop">450&thinsp;Hz</label>
             </form>
