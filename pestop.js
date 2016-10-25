@@ -3,10 +3,39 @@ fetch('pestop.json', {method:'GET'}).then(response => {
     response.json().then(data => {
         pestopdata = data;
         var f0 = document.getElementById('PESTO-P:slider').value;
-        updatePESTOP(f0);
-        document.getElementById('PESTO-P:value').innerHTML = f0 + ' Hz';
+        drawPESTOP(f0);
     });
 });
+
+function drawPESTOP(f0) {
+    if (pestopdata === null) {
+        return;
+    }
+
+    var plotdata = [{
+        type: "scatter",
+        name: "template IFD",
+        x: pestopdata.frequencies,
+        y: pestopdata[f0]
+    },
+    {
+        type: "scatter",
+        name: "IFD spectrum",
+        x: pestopdata.frequencies,
+        y: pestopdata.spectrum
+    }];
+    var plotlayout = {
+        height: 200,
+        width: 650,
+        xaxis: { title: "frequency in Hz" },
+        yaxis: { title: "IFD in Hz" },
+        margin: { t:30, r:20, b:50, l:50 },
+        title: "IFD Difference = "
+    };
+    Plotly.newPlot("pestop", plotdata, plotlayout);
+
+    updatePESTOP(f0);
+}
 
 function updatePESTOP(f0) {
     if (pestopdata === null) {
@@ -32,27 +61,10 @@ function updatePESTOP(f0) {
     var bias = signal_bias + (f0-80)/(450-80)*(template_bias - signal_bias);
     difference /= bias;
 
-    var plotdata = [{
-        type: "scatter",
-        name: "template IFD",
-        x: pestopdata.frequencies,
-        y: pestopdata[f0]
-    },
-    {
-        type: "scatter",
-        name: "IFD spectrum",
-        x: pestopdata.frequencies,
-        y: pestopdata.spectrum
-    }];
-    var plotlayout = {
-        height: 200,
-        width: 650,
-        xaxis: { title: "frequency in Hz" },
-        yaxis: { title: "IFD in Hz" },
-        margin: { t:30, r:20, b:50, l:50 },
-        title: "IFD Difference = " + difference.toFixed(2)
-    };
-    Plotly.newPlot("pestop", plotdata, plotlayout);
+    plotdiv = document.getElementById('pestop');
+    plotdiv.data[0].y = pestopdata[f0];
+    plotdiv.layout.title = "IFD Difference = " + difference.toFixed(2);
+    Plotly.redraw('pestop');
 
     document.getElementById('PESTO-P:value').innerHTML = document.getElementById('PESTO-P:slider').value + '&thinsp;Hz';
     if (f0 == 115) {
