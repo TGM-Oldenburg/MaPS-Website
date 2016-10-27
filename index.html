@@ -15,36 +15,44 @@
         </header>
 
         <article>
-            <p class="abstract">This paper presents a new algorithm (PESTO) for estimating the
-                fundamental frequency of human voices using both the magnitude and phase
-                spectrogram. In order to evaluate the accuracy of the new algorithm, several
-                variants of PESTO are compared to one another, and to the reference algorithms YIN,
-                RAPT, and PEFAC on a large database of speech recordings and background noises. The
-                evaluation shows that PESTO outperforms these algorithms, both in terms of
-                fundamental frequency estimation precision and voice activity detection accuracy.
-                Additional experiments evaluate PESTO's performance for different pitch frequencies,
-                noise types, and reverberation. At positive signal to noise ratios, PESTO reaches
-                close to 100&thinsp;% fundamental frequency estimation precision and 90&thinsp;% voice
-                activity detection accuracy across the entire dataset.</p>
+            <p><i>This is the website for a paper that is currently in review. As soon as the
+            paper has passed review, source code for PESTO will be made available here. Until then,
+            only examples and a brief description are published here.</i></p>
+
+            <p class="abstract">This website presents a new algorithm (PESTO) for estimating the
+            fundamental frequency of human voices using both the magnitude and phase spectrogram. In
+            order to evaluate the accuracy of the new algorithm, several variants of PESTO are
+            compared to one another, and to the reference algorithms YIN, RAPT, and PEFAC on a large
+            database of speech recordings and background noises. The evaluation shows that PESTO
+            outperforms these algorithms, both in terms of fundamental frequency estimation
+            precision and voice activity detection accuracy. Additional experiments evaluate PESTO's
+            performance for different pitch frequencies, noise types, and reverberation. At positive
+            signal to noise ratios, PESTO reaches close to 100&thinsp;% fundamental frequency
+            estimation precision and 90&thinsp;% voice activity detection accuracy across the entire
+            dataset.</p>
 
             <div id="introspectrogram"></div>
 
 
             <h2>Code</h2>
 
-            <p>You can download free implementations of PESTO in Python, Matlab, and Julia by
+            <p>You can download source code for PESTO in Python, Matlab, and Julia by
             cloning this repository:</p>
-            <code>git clone foo@bar.pesto.git</code>
+            <p><i>Code examples will be made available here as soon as the paper has passed
+            review.</i></p>
+            <!-- <code>git clone git@tgm-git.jade-hs.de:bastianbechtold/pesto.git</code> -->
             <p>The code is released under the terms of the
-                <a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-clause license</a>,
-                © 2016, Bastian Bechtold, Jade Hochschule</p>
+            <a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-clause license</a>, © 2016,
+            Bastian Bechtold, Jade Hochschule. This means that you can read, use, and modify the
+            source code as you see fit, as long you recognize our authorship of the code.
+            Additionally, we would kindly ask you to let us know how you use the code.</p>
 
 
             <h2>PESTO-M: Correlating Templates with the Magnitude Spectrum</h2>
 
             <p>PESTO-M correlates a number of template spectra at different fundamental frequencies
-                with the signal magnitude spectrum. The point of highest correlation is the
-                estimated fundamental frequency</p>
+            with the signal magnitude spectrum. The point of highest correlation is the estimated
+            fundamental frequency:</p>
 
             <div id="pestom"></div>
             <script src="pestom.js"></script>
@@ -61,21 +69,24 @@
             </form>
 
             <p>At about 115&thinsp;Hz, all the peaks in the template match up with the peaks in the
-                spectrum, and the magnitude correlation reaches its maximum. This frequency is the
-                estimated fundamental frequency for this spectrum.</p>
+            spectrum, and the magnitude correlation reaches its maximum. That frequency is the
+            estimated fundamental frequency for this spectrum.</p>
 
 
             <h2>PESTO-P: Subtracting Templates from the Instantaneous Frequency Deviation</h2>
 
-            <p> This variant is the Instantanous Frequency Deviation (IFD), which is IF(f)-f, where
-                IF is the Instantanous Frequency, or time-derivative of the phase spectrum.</p>
+            <p>PESTO-P works on a variant of the phase spectrum, called the Instantanous Frequency
+            Deviation (IFD), which is IF(f)-f, or the difference between the Instantanous Frequency
+            IF(f) and the frequency f. The IF(f) is the time-derivative of the phase spectrum.</p>
+
+            <p>The IFD for the same speech signal as in the introduction looks like this:</p>
 
             <div id="ifd"></div>
             <script>display_ifd("Mann_short.wav", "ifd", [650, 300])</script>
 
             <p>In the IFD, speech is represented by a sawtooth pattern. PESTO-P subtracts a number
-                of template spectra at different fundamental frequencies from the IFD. The point of
-                lowest difference is the estimated fundamental frequency.</p>
+            of template spectra at different fundamental frequencies from the IFD. The point of
+            lowest difference is the estimated fundamental frequency:</p>
 
             <div id="pestop"></div>
             <script src="pestop.js"></script>
@@ -92,18 +103,18 @@
             </form>
 
             <p>At about 115&thinsp;Hz, all the zeros in the template match up with the zeros in the
-                spectrum, and the IFD difference reaches its maximum. This frequency is the
-                estimated fundamental frequency for this spectrum.</p>
+            spectrum, and the IFD difference reaches its maximum. This frequency is the estimated
+            fundamental frequency for this spectrum.</p>
 
 
             <h2>PESTO: Maximum A Posteriori Combination of Magnitude Correlation and IFD Difference</h2>
 
             <p>PESTO combines the magnitude correlation from PESTO-M with the IFD difference from
-                PESTO-P in a Bayesan maximum a posteriori fundamental frequency estimator. You can
-                see the results of this estimation on a few speech signals from the
-                <a href="https://www.spsc.tugraz.at/tools/ptdb-tug">PTDB-TUG</a>
-                database and noises from the <a href="http://eprints.qut.edu.au/85240/">QUT-NOISE</a>
-                corpus in the next figure:</p>
+            PESTO-P in a Bayesan maximum a posteriori fundamental frequency estimator. You can see
+            the results of this estimation on a few speech signals from the
+            <a href="https://www.spsc.tugraz.at/tools/ptdb-tug">PTDB-TUG</a> database and noises
+            from the <a href="http://eprints.qut.edu.au/85240/">QUT-NOISE</a> corpus in the next
+            figure:</p>
 
             <div id="pesto"></div>
             <select id="PESTO:speaker" style="text-align:center;" onchange="refresh_pesto()">
@@ -133,22 +144,27 @@
             </select>
             <audio id="PESTO:player" controls></audio>
 
-            <p>This figure shows PESTO's strengths and limitations. On the one hand, PESTO estimates
-                speech fundamental frequencies with very high precision and very rarely selects
-                non-pitched values as pitched. On the other hand, this precision leads to less
-                accuracy, and some pitched frames are not recognized. This is a trade-off that is
-                configurable through a parameter.</p>
+            <p>This figure shows how PESTO accurately recognizes the base frequency track in noisy
+            speech recordings. In general, PESTO prefers high precision over high recall, and thus
+            accepts some false negatives in favor of too many false positives. For many
+            applications, this is advantageous, since it is more important to get
+            <emph>reliable</emph> answers than to get plentiful answers. This is a trade-off that is
+            configurable through a detection threshold parameter.</p>
 
 
             <h2>Evaluation</h2>
 
             <p>The fundamental frequency estimation performance of PESTO was evaluated using a large
-                database of f<sub>0</sub>-annotated speech recordings from the PTDB-TUG corpus, and
-                acoustic noise recordings from the QUT-NOISE corpus.</p>
+            database of f<sub>0</sub>-annotated speech recordings from the
+            <a href="https://www.spsc.tugraz.at/tools/ptdb-tug">PTDB-TUG</a> corpus, and acoustic
+            noise recordings from the <a href="http://eprints.qut.edu.au/85240/">QUT-NOISE</a>
+            corpus.</p>
 
             <p>Additionally, the PESTO's performance was compared against the well-known fundamental
-                frequency estimation algorithms PEFAC, RAPT, and YIN. The error measures for this
-                evaluation are:</p>
+            frequency estimation algorithms <a href="http://dx.dio.org/10.1109/TASLP.2013.2295918">
+            PEFAC</a>, <a href="http://www.ee.columbia.edu/~dpwe/papers/Talkin95-rapt.pdf">RAPT</a>,
+            and <a href="http://dx.dio.org/10.1121/1.1458024">YIN</a>. The error measures for this
+            evaluation are:</p>
 
             <dl>
                 <dt>Gross Pitch Error</dt><dd>Percentage of frames that are correctly classified as
@@ -159,7 +175,12 @@
             <div id="pesto-gpe"></div><div id="pesto-fpe"></div>
             <script src="pesto-compare.js"></script>
 
-            <p>Thus, PESTO achieves almost 100&thinsp;% precision at positive signal to noise ratios.</p>
+            <p>Thus, PESTO achieves almost 100&thinsp;% precision at positive signal to noise
+            ratios.</p>
+
+            <p>For further information, a full definition of the algorithm, and a more thorough
+            evaluation, please read the paper at <i>(link will be inserted here once published)
+            </i>.</p>
 
         </article>
 
