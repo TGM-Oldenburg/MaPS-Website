@@ -36,16 +36,16 @@
 
             <h2>Code</h2>
 
-            <p>You can download source code for PESTO in Python, Matlab, and Julia by
+            <p>Source code for PESTO in Python, Matlab, and Julia can be downloaded by
             cloning this repository:</p>
             <p><i>Code examples will be made available here as soon as the paper has passed
             review.</i></p>
             <!-- <code>git clone git@tgm-git.jade-hs.de:bastianbechtold/pesto.git</code> -->
             <p>The code is released under the terms of the
             <a href="https://opensource.org/licenses/BSD-3-Clause">BSD 3-clause license</a>, © 2016,
-            Bastian Bechtold, Jade Hochschule. This means that you can read, use, and modify the
-            source code as you see fit, as long you recognize our authorship of the code.
-            Additionally, we would kindly ask you to let us know how you use the code.</p>
+            Bastian Bechtold, Jade Hochschule. This means that the source code can be read, used,
+            and modified freely, as long as our authorship of the code is recognized. Additionally,
+            we kindly request feedback on how the code is used.</p>
 
 
             <h2>PESTO-M: Correlating Templates with the Magnitude Spectrum</h2>
@@ -79,7 +79,8 @@
             Deviation (IFD), which is IF(f)-f, or the difference between the Instantanous Frequency
             IF(f) and the frequency f. The IF(f) is the time-derivative of the phase spectrum.</p>
 
-            <p>The IFD for the same speech signal as in the introduction looks like this:</p>
+            <p>The IFD for the same speech signal as discussed in the introduction looks like
+            this:</p>
 
             <div id="ifd"></div>
             <script>display_ifd("Mann_short.wav", "ifd", [650, 300])</script>
@@ -110,11 +111,11 @@
             <h2>PESTO: Maximum A Posteriori Combination of Magnitude Correlation and IFD Difference</h2>
 
             <p>PESTO combines the magnitude correlation from PESTO-M with the IFD difference from
-            PESTO-P in a Bayesan maximum a posteriori fundamental frequency estimator. You can see
-            the results of this estimation on a few speech signals from the
+            PESTO-P in a Bayesan maximum a posteriori fundamental frequency estimator. The results
+            of this estimation on a few speech signals from the
             <a href="https://www.spsc.tugraz.at/tools/ptdb-tug">PTDB-TUG</a> database and noises
-            from the <a href="http://eprints.qut.edu.au/85240/">QUT-NOISE</a> corpus in the next
-            figure:</p>
+            from the <a href="http://eprints.qut.edu.au/85240/">QUT-NOISE</a> corpus can be seen in
+            the following figure:</p>
 
             <div id="pesto"></div>
             <select id="PESTO:speaker" style="text-align:center;" onchange="refresh_pesto()">
@@ -147,9 +148,9 @@
             <p>This figure shows how PESTO accurately recognizes the base frequency track in noisy
             speech recordings. In general, PESTO prefers high precision over high recall, and thus
             accepts some false negatives in favor of too many false positives. For many
-            applications, this is advantageous, since it is more important to get
-            <emph>reliable</emph> answers than to get plentiful answers. This is a trade-off that is
-            configurable through a detection threshold parameter.</p>
+            applications, this is advantageous, since it is more important to obtain
+            <emph>reliable</emph> answers than to obtain plentiful answers. This is a trade-off that
+            is configurable through a detection threshold parameter.</p>
 
 
             <h2>Evaluation</h2>
