@@ -1,6 +1,6 @@
 fetch('maps-compare-fpe.json', {method:'GET'}).then(response => {
     response.json().then(data => {
-        update_maps_compare('maps-fpe', data, 'Fine Pitch Error in f/f<sub>0</sub>', [0, 0.2]);
+        update_maps_compare('maps-fpe', data, 'Fine Pitch Error in %', [0, 10]);
     });
 });
 
