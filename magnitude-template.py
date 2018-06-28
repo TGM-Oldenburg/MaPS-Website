@@ -10,7 +10,7 @@ spectrum = np.abs(pesto.stft(pesto.SignalBlocks(signal, fs))[50])
 spectrum = spectrum / np.max(spectrum)
 frange = np.linspace(0, 22050, 1024)
 
-with open('pestom.json', 'w') as outfile:
+with open('magnitude-template.json', 'w') as outfile:
     json.dump(dict({str(f):list(d)[:100] for f, d in zip(freqs,data)},
                    spectrum=spectrum.tolist()[:100],
                    frequencies=list(frange)[:100]), outfile)

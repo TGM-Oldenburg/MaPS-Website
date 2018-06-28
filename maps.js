@@ -1,10 +1,10 @@
 var audioCtx = new AudioContext();
 
-var pestodata = null;
+var mapsdata = null;
 fetch('samples/tracks.json', {method:'GET'}).then(response => {
     response.json().then(data => {
-        pestodata = data;
-        refresh_pesto();
+        mapsdata = data;
+        refresh_maps();
     });
 });
 
@@ -224,16 +224,16 @@ function twilight() {
     return Array.from(colors, (color, idx) => [idx/(colors.length-1), color]);
 }
 
-function refresh_pesto() {
-    var speaker = document.getElementById("PESTO:speaker").value;
-    var snr = document.getElementById("PESTO:snr").value;
-    var noise = document.getElementById("PESTO:noise").value;
-    display_pesto(speaker + noise + snr + ".wav");
+function refresh_maps() {
+    var speaker = document.getElementById("maps:speaker").value;
+    var snr = document.getElementById("maps:snr").value;
+    var noise = document.getElementById("maps:noise").value;
+    display_maps(speaker + noise + snr + ".wav");
 }
 
-function display_pesto(filename) {
-    document.getElementById("PESTO:player").src = 'samples/' + filename;
-    display_spectrogram('samples/' + filename, "pesto", [650, 300], pestodata[filename]);
+function display_maps(filename) {
+    document.getElementById("maps:player").src = 'samples/' + filename;
+    display_spectrogram('samples/' + filename, "maps", [650, 300], mapsdata[filename]);
 }
 
 fetch('Mann_short.json', {method:'GET'}).then(response => {

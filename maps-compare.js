@@ -1,22 +1,22 @@
-fetch('pesto-compare-fpe.json', {method:'GET'}).then(response => {
+fetch('maps-compare-fpe.json', {method:'GET'}).then(response => {
     response.json().then(data => {
-        update_pesto_compare('pesto-fpe', data, 'Fine Pitch Error in f/f<sub>0</sub>', [0, 0.2]);
+        update_maps_compare('maps-fpe', data, 'Fine Pitch Error in f/f<sub>0</sub>', [0, 0.2]);
     });
 });
 
-fetch('pesto-compare-gpe.json', {method:'GET'}).then(response => {
+fetch('maps-compare-gpe.json', {method:'GET'}).then(response => {
     response.json().then(data => {
-        update_pesto_compare('pesto-gpe', data, 'Gross Pitch Error in %', [0, 100]);
+        update_maps_compare('maps-gpe', data, 'Gross Pitch Error in %', [0, 100]);
     });
 });
 
-function update_pesto_compare(divname, data, ylabel, ylim) {
+function update_maps_compare(divname, data, ylabel, ylim) {
     var snrs = [-20, -15, -10, -5, 0, 5, 10, 15, 20, 25, 30, 35, 40];
     var plotdata = [{
         type: 'scatter',
-        name: 'PESTO',
+        name: 'MaPS',
         x: snrs,
-        y: Array.from(snrs, snr => data.PESTO[snr])
+        y: Array.from(snrs, snr => data.MaPS[snr])
     }, {
         type: 'scatter',
         name: 'PEFAC',
