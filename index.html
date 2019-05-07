@@ -11,7 +11,7 @@
         <script src="maps.js"></script>
 
         <header>
-            <h1>Fundamental Frequency Estimation of the Human Voice with the Magnitude and Phase Spectrogram</h1>
+            <h1>Joint Fundamental Frequency Estimation and Voice Activity Detection of Speech with the Magnitude and Phase Spectrogram</h1>
         </header>
 
         <article>
@@ -21,14 +21,18 @@
                 paper has passed review, source code for MaPS will be made available as well.</i></p>
 
             <p class="abstract">The fundamental frequency of the human voice is an important feature
-              for various speech processing applications such as speech enhancement, speech
-              separation, and speech compression algorithms. This paper presents an algorithm that
-              probabilistically combines features from the magnitude spectrum and the phase
-              spectrum, and derives a direct pitch confidence measure, which avoids both octave
-              errors and ambiguous estimates. The algorithm estimates fewer frames as voiced, but
-              remains reliable even with high levels of noise. These characteristics are examined
-              with synthetic tone complexes and a large, freely available corpus of speech and noise
-              recordings.</p>
+              for various speech processing applications such as speech enhancement, noise
+              reduction, and speech compression algorithms. In speech recordings, only voiced frames
+              have a valid fundamental frequency. A common problem in fundamental frequency
+              estimation is voicing false positives that label noisy or ambiguous frames as voiced,
+              even though no valid fundamental frequency can be estimated. This paper presents a
+              combined fundamental frequency estimation and voice activity detection algorithm that
+              probabilistically combines features from the magnitude spectrum and the phase spectrum
+              and derives a per-frequency voice probability measure that avoids ambiguous estimates
+              and false positives. The algorithm thus estimates fewer frames as voiced, but the
+              remaining estimates stay reliable, even with high levels of noise. These
+              characteristics are examined with synthetic tone complexes and a large corpus of
+              speech and noise recordings.</p>
 
             <div id="introspectrogram"></div>
 
